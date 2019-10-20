@@ -6,7 +6,7 @@
 /*   By: yvanat <yvanat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/07 17:29:28 by yvanat            #+#    #+#             */
-/*   Updated: 2019/10/12 14:50:08 by yvanat           ###   ########.fr       */
+/*   Updated: 2019/10/20 18:36:59 by yvanat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,12 @@ char	*ft_substr(const char *s, unsigned int start, size_t len)
 	char	*new;
 
 	if (!s || start > ft_strlen(s))
-		return (NULL);
+	{
+		if (!(new = malloc(1)))
+			return (NULL);
+		new[0] = '\0';
+		return (new);
+	}
 	i = 0;
 	while ((i < len) && s[start + i])
 		i++;

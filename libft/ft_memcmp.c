@@ -6,7 +6,7 @@
 /*   By: yvanat <yvanat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/07 16:36:01 by yvanat            #+#    #+#             */
-/*   Updated: 2019/10/20 11:07:15 by yvanat           ###   ########.fr       */
+/*   Updated: 2019/10/20 17:50:49 by yvanat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 	i = 0;
 	a = (unsigned char*)s1;
 	b = (unsigned char*)s2;
-	while (i < n)
+	while (i < n && (a[i] || b[i]))
 	{
 		if (a[i] != b[i])
 			return (a[i] - b[i]);

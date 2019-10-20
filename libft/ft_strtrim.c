@@ -6,7 +6,7 @@
 /*   By: yvanat <yvanat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 12:43:36 by yvanat            #+#    #+#             */
-/*   Updated: 2019/10/12 16:28:06 by yvanat           ###   ########.fr       */
+/*   Updated: 2019/10/20 17:26:25 by yvanat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,14 @@ char			*ft_strtrim(const char *s1, const char *set)
 	if (!s1 || !set)
 		return (NULL);
 	i = 0;
-	while (ft_strchr(set, s1[i]))
+	while (s1[i] && ft_strchr(set, s1[i]))
 		i++;
 	len = (int)ft_strlen(s1) - 1;
 	if (len < 0)
 		len = 0;
 	while (len >= 0 && ft_strchr(set, s1[len]))
 		len--;
-	len -= i - 1;
-	if (len < 0)
-		len = 0;
+	len = (i > len) ? 0 : (len - i + 1);
 	if (!(new = malloc(sizeof(*new) * (len + 1))))
 		return (NULL);
 	j = 0;

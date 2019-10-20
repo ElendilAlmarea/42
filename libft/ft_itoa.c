@@ -6,7 +6,7 @@
 /*   By: yvanat <yvanat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 13:18:03 by yvanat            #+#    #+#             */
-/*   Updated: 2019/10/12 15:34:27 by yvanat           ###   ########.fr       */
+/*   Updated: 2019/10/20 17:03:47 by yvanat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static char	*ft_itoa_second(char *new, int n, int index, int len)
 		i /= 10;
 		index++;
 	}
+	new[index] = '\0';
 	return (new);
 }
 

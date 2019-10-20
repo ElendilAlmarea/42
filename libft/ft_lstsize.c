@@ -6,7 +6,7 @@
 /*   By: yvanat <yvanat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/09 14:07:27 by yvanat            #+#    #+#             */
-/*   Updated: 2019/10/12 17:08:15 by yvanat           ###   ########.fr       */
+/*   Updated: 2019/10/20 17:49:11 by yvanat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_lstsize(t_list *lst)
 	if (lst)
 	{
 		tmp = lst;
-		while (lst)
+		while (tmp)
 		{
 			tmp = tmp->next;
 			len++;

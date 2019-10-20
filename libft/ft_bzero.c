@@ -6,7 +6,7 @@
 /*   By: yvanat <yvanat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/07 16:37:57 by yvanat            #+#    #+#             */
-/*   Updated: 2019/10/20 11:02:28 by yvanat           ###   ########.fr       */
+/*   Updated: 2019/10/20 16:56:40 by yvanat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_bzero(void *b, size_t len)
 	i = 0;
 	while (i < len)
 	{
-		((int*)b)[i] = 0;
+		((unsigned char*)b)[i] = 0;
 		i++;
 	}
 }
