@@ -6,7 +6,7 @@
 /*   By: yvanat <yvanat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/09 13:36:24 by yvanat            #+#    #+#             */
-/*   Updated: 2019/10/12 17:06:13 by yvanat           ###   ########.fr       */
+/*   Updated: 2019/10/20 14:50:21 by yvanat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_lstadd_front(t_list **alst, t_list *neww)
 {
 	t_list	*tmp;
 
-	if (*neww && *alst && alst)
+	if (neww && *alst && alst)
 	{
 		tmp = *alst;
 		neww->next = tmp;
