@@ -1,2 +1,2 @@
-all projects I do for 42 (piscine not included)
+all projects I do for 42 (piscine not included)\n
 do what you want with it
