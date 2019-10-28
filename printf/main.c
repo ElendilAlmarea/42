@@ -6,7 +6,7 @@
 /*   By: yvanat <yvanat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 12:26:08 by yvanat            #+#    #+#             */
-/*   Updated: 2019/10/18 12:17:26 by yvanat           ###   ########.fr       */
+/*   Updated: 2019/10/28 14:33:23 by yvanat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int		main(int argc, char **argv)
 {
 	(void)argc;
 	(void)argv;
-	ft_printf("bon%s%2c", "jour", 'm');
+	printf("%42d\n", NULL);
+	ft_printf("%42d\n", NULL);
 	return (0);
 }

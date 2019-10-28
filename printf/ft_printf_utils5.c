@@ -6,7 +6,7 @@
 /*   By: yvanat <yvanat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 15:33:37 by yvanat            #+#    #+#             */
-/*   Updated: 2019/10/16 18:42:16 by yvanat           ###   ########.fr       */
+/*   Updated: 2019/10/28 14:32:59 by yvanat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ void	mall(t_var *var, va_list ap)
 	char	*s;
 	int		i;
 
-	s = va_arg(ap, char*);
+	if (!(s = va_arg(ap, char*)))
+		s = "(null)";
 	if ((var->s = malloc(sizeof(char) * (ft_strlen(s) + 1))))
 	{
 		i = -1;

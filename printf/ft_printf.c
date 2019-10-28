@@ -6,7 +6,7 @@
 /*   By: yvanat <yvanat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 12:54:03 by yvanat            #+#    #+#             */
-/*   Updated: 2019/10/16 17:44:18 by yvanat           ###   ########.fr       */
+/*   Updated: 2019/10/28 14:20:56 by yvanat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		ft_printf(const char *format, ...)
 	int		len;
 
 	if (!(var = malloc(sizeof(t_var))))
-		return (0);
+		return (-1);
 	va_start(ap, format);
 	var->len = 0;
 	var->i = 0;
