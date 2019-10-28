@@ -6,7 +6,7 @@
 /*   By: yvanat <yvanat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/09 14:24:27 by yvanat            #+#    #+#             */
-/*   Updated: 2019/10/28 12:28:57 by yvanat           ###   ########.fr       */
+/*   Updated: 2019/10/28 13:30:53 by yvanat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,5 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *))
 	{
 		(*del)(lst->content);
 		free(lst);
-		lst = NULL;
 	}
 }
