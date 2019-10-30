@@ -6,7 +6,7 @@
 /*   By: yvanat <yvanat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 12:17:42 by yvanat            #+#    #+#             */
-/*   Updated: 2019/10/20 13:44:17 by yvanat           ###   ########.fr       */
+/*   Updated: 2019/10/28 16:00:03 by yvanat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # include <fcntl.h>
 # include <stdio.h>
 
-int		get_next_line(int fd, char **line);
-int		read_from_index(char **line, char *buffer, int index, ssize_t size);
-void	free_line(char **line, int index);
+int	get_next_line(int fd, char **line);
+int	read_from_index(char **line, char *buffer, int index, int fd);
+int	ft_strlen(char *s);
 
 #endif
