@@ -6,7 +6,7 @@
 /*   By: yvanat <yvanat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 13:22:43 by yvanat            #+#    #+#             */
-/*   Updated: 2019/10/28 14:29:11 by yvanat           ###   ########.fr       */
+/*   Updated: 2019/10/30 12:19:42 by yvanat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,6 @@ void	first_while(const char *format, t_var *var, va_list ap)
 		if (format[var->i] == '%')
 		{
 			(var->i)++;
-			if (format[var->i] == '%')
-			{
-				write(1, "%", 1);
-				(var->i)++;
-				var->len++;
-				continue ;
-			}
 			second_while(format, var, ap);
 		}
 		else
@@ -56,9 +49,14 @@ void	second_while(const char *format, t_var *var, va_list ap)
 		if (format[var->i] == 'c' || format[var->i] == 's' || format[var->i]
 			== 'p' || format[var->i] == 'd' || format[var->i] == 'i' ||
 			format[var->i] == 'u' || format[var->i] == 'x' || format[var->i]
-			== 'X')
+			== 'X' || format[var->i] == '%')
 		{
 			third_if(format, var, ap);
+			if (format[var->i] == '%')
+			{
+				var->c = '%';
+				var->len += put_char(var);
+			}
 			fourth_if(format, var, ap);
 			(var->i)++;
 			break ;
@@ -91,14 +89,15 @@ void	first_if(const char *format, t_var *var, va_list ap)
 
 void	second_if(const char *format, t_var *var)
 {
-	if (!var->precision)
+	if (!(var->precision))
 		var->stari = format[var->i] - 48;
 	else
 		var->staross = format[var->i] - 48;
+	var->power = 10;
 	while (format[var->i + 1] >= 48 && format[var->i + 1] <= 57)
 	{
 		(var->i)++;
-		if (!var->precision)
+		if (!(var->precision))
 			var->stari = var->stari * var->power + format[var->i] - 48;
 		else
 			var->staross = var->staross * var->power + format[var->i] - 48;

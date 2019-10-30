@@ -20,8 +20,6 @@ $(NAME):
 
 all:		${NAME}
 
-bonus :
-
 clean:
 			rm -f ${OBJ}
 
@@ -31,4 +29,3 @@ fclean:		clean
 re:			fclean all
 
 .PHONY:		all clean fclean re
-
