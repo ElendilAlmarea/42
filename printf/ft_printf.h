@@ -6,7 +6,7 @@
 /*   By: yvanat <yvanat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/12 11:35:04 by yvanat            #+#    #+#             */
-/*   Updated: 2019/10/16 18:23:23 by yvanat           ###   ########.fr       */
+/*   Updated: 2019/10/31 14:00:38 by yvanat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct	s_func
 	int				neg;
 }				t_func;
 
+int				put_format(t_var *var);
 int				ft_printf(const char *format, ...);
 int				put_char(t_var *var);
 int				put_str(t_var *var);

@@ -6,7 +6,7 @@
 /*   By: yvanat <yvanat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 14:17:59 by yvanat            #+#    #+#             */
-/*   Updated: 2019/10/28 17:07:55 by yvanat           ###   ########.fr       */
+/*   Updated: 2019/10/31 15:39:00 by yvanat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,11 +120,11 @@ void	sixth_if(t_var *var, t_func *func)
 void	seventh_if(t_var *var, t_func *func)
 {
 	func->len = 0;
-	func->nb = var->u;
-	while ((func->nb != 0 || func->len == 0) &&
+	func->unb = var->u;
+	while ((func->unb != 0 || func->len == 0) &&
 		(var->staross != -1 || var->u != 0))
 	{
-		func->nb /= 10;
+		func->unb /= 10;
 		(func->len)++;
 	}
 	func->len_p = func->len;

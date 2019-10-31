@@ -6,7 +6,7 @@
 /*   By: yvanat <yvanat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 14:49:44 by yvanat            #+#    #+#             */
-/*   Updated: 2019/10/16 17:05:03 by yvanat           ###   ########.fr       */
+/*   Updated: 2019/10/31 15:39:54 by yvanat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		put_char(t_var *var)
 	write(1, &(var->c), 1);
 	if (var->left)
 		put_times_c(var->stari - 1, ' ');
-	return (var->stari ? 1 : var->stari);
+	return (var->stari ? var->stari : 1);
 }
 
 int		put_str(t_var *var)
@@ -86,15 +86,15 @@ int		put_unsint(t_var *var)
 	seventh_if(var, func);
 	if (func->len > 0)
 	{
-		func->nb = 1;
+		func->unb = 1;
 		while ((func->len)-- > 1)
-			func->nb *= 10;
-		while (func->nb > 0)
+			func->unb *= 10;
+		while (func->unb > 0)
 		{
-			func->c = var->u / func->nb + 48;
+			func->c = var->u / func->unb + 48;
 			write(1, &(func->c), 1);
-			var->u -= (var->u / func->nb) * func->nb;
-			func->nb /= 10;
+			var->u -= (var->u / func->unb) * func->unb;
+			func->unb /= 10;
 		}
 	}
 	if (var->left)

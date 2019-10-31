@@ -6,7 +6,7 @@
 /*   By: yvanat <yvanat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 15:33:37 by yvanat            #+#    #+#             */
-/*   Updated: 2019/10/28 14:32:59 by yvanat           ###   ########.fr       */
+/*   Updated: 2019/10/31 14:24:17 by yvanat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,16 @@ int		free_ret(int ret, t_func *func)
 {
 	free(func);
 	return (ret);
+}
+
+int		put_format(t_var *var)
+{
+	if (var->zero && !(var->left))
+		put_times_c(var->stari - 1, '0');
+	else if (!(var->left))
+		put_times_c(var->stari - 1, ' ');
+	write(1, &(var->c), 1);
+	if (var->left)
+		put_times_c(var->stari - 1, ' ');
+	return (var->stari ? var->stari : 1);
 }
