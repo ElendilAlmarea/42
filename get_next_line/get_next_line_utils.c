@@ -6,7 +6,7 @@
 /*   By: yvanat <yvanat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 12:20:52 by yvanat            #+#    #+#             */
-/*   Updated: 2019/11/01 19:10:20 by yvanat           ###   ########.fr       */
+/*   Updated: 2019/11/01 19:29:01 by yvanat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,6 @@ int	read_from_index(char **line, char *buffer, int index, int fd)
 		if (index == 0 || index == -2)
 		{
 			size = read(fd, buffer, BUFFER_SIZE);
-			if (index == -2 && size == 0)
-				return (-2);
-			if (index == -2)
-				index = 0;
 			if (size == -1 || size == 0)
 				return ((int)size);
 			buffer[size] = '\0';
@@ -73,7 +69,7 @@ int	read_from_index(char **line, char *buffer, int index, int fd)
 			return (-1);
 		if (size == 0 || buffer[index + i] == '\n')
 			return ((size == 0) ? 0 : index + i + 1);
-		index = -2;
+		index = 0;
 	}
 	return (-1);
 }
