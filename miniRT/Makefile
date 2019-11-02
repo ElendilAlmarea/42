@@ -29,3 +29,11 @@ fclean:		clean
 re:			fclean all
 
 .PHONY:		all clean fclean re
+
+
+
+wsl:
+			gcc -I -g -L lib -l mlx -framework OpenGL -framework AppKit test.c && ./a.out
+
+mac:
+			gcc -I /usr/local/include -g -L /usr/local/lib -l mlx -framework OpenGL -framework AppKit test.c && ./a.out
