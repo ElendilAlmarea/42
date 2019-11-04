@@ -1,39 +1,28 @@
 CC =		gcc
 
-CFLAGS =	-Wall -Werror -Wextra -I.
+CFLAGS =	-Wall -Werror -Wextra -I /usr/local/include -g -L /usr/local/lib -lmlx -l mlx -framework OpenGL -framework AppKit
 
-NAME =		libftprintf.a
+NAME =		miniRT
 
-SRC =	ft_printf.c \
-			ft_printf_utils.c \
-			ft_printf_utils2.c \
-			ft_printf_utils3.c \
-			ft_printf_utils4.c \
-			ft_printf_utils5.c \
-
-OBJ =		${SRC:%.c=%.o}
+SRC =		main.c \
+			events.c \
+			parser.c \
+			usual_functions.c
 
 $(NAME):
-			${CC} ${CFLAGS} -c ${SRC}
-			ar rc ${NAME} ${OBJ}
-			ranlib ${NAME}
+			${CC} ${CFLAGS} ${SRC} -o ${NAME}
 
 all:		${NAME}
 
 clean:
-			rm -f ${OBJ}
+			rm -f ${NAME}
+			rm -rf ${NAME}.dSYM
 
 fclean:		clean
-			rm -f ${NAME}
 
 re:			fclean all
 
 .PHONY:		all clean fclean re
 
-
-
-wsl:
-			gcc -I -g -L lib -l mlx -framework OpenGL -framework AppKit test.c && ./a.out
-
-mac:
-			gcc -I /usr/local/include -g -L /usr/local/lib -l mlx -framework OpenGL -framework AppKit test.c && ./a.out
+temp:
+			${CC} -I /usr/local/include -g -L /usr/local/lib -lmlx -l mlx -framework OpenGL -framework AppKit ${SRC} -o ${NAME} && ./${NAME}
