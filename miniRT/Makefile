@@ -7,7 +7,9 @@ NAME =		miniRT
 SRC =		main.c \
 			events.c \
 			parser.c \
-			usual_functions.c
+			usual_functions.c \
+			parse_calls1.c \
+			parse_calls2.c
 
 $(NAME):
 			${CC} ${CFLAGS} ${SRC} -o ${NAME}

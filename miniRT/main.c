@@ -6,12 +6,12 @@
 /*   By: yvanat <yvanat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 15:17:37 by yvanat            #+#    #+#             */
-/*   Updated: 2019/11/04 18:47:05 by yvanat           ###   ########.fr       */
+/*   Updated: 2019/11/06 19:32:56 by yvanat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
+//printf("%s\n", strerror(errno));
 int     main(int argc, char **argv)
 {
     t_data		*data;
@@ -26,7 +26,8 @@ int     main(int argc, char **argv)
 	{
 		return (0);
 	}
-	ft_parse(data);
+	data_init(data);
+	ft_parse(argv[1], data);
     if ((data->mlx_ptr = mlx_init()) == NULL)
 	{
 		ft_free(data);
