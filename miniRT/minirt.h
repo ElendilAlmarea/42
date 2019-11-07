@@ -6,7 +6,7 @@
 /*   By: yvanat <yvanat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 14:05:57 by yvanat            #+#    #+#             */
-/*   Updated: 2019/11/06 19:36:06 by yvanat           ###   ########.fr       */
+/*   Updated: 2019/11/07 20:37:45 by yvanat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ int				parse_sp(t_data *data, char *buffer, int i);
 int				parse_sq(t_data *data, char *buffer, int i);
 int				parse_cy(t_data *data, char *buffer, int i);
 int				parse_tr(t_data *data, char *buffer, int i);
+int				white_space(char c);
 void			ft_parse(char *file, t_data *data);
 void			ft_free(t_data *data);
 void			put_error(ssize_t size);
