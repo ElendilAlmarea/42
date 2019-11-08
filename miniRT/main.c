@@ -6,7 +6,7 @@
 /*   By: yvanat <yvanat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 15:17:37 by yvanat            #+#    #+#             */
-/*   Updated: 2019/11/06 19:32:56 by yvanat           ###   ########.fr       */
+/*   Updated: 2019/11/08 14:06:52 by yvanat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int     main(int argc, char **argv)
 	}
 	data_init(data);
 	ft_parse(argv[1], data);
+	scene_matrix(data);
     if ((data->mlx_ptr = mlx_init()) == NULL)
 	{
 		ft_free(data);

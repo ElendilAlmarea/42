@@ -6,7 +6,7 @@
 /*   By: yvanat <yvanat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 14:05:57 by yvanat            #+#    #+#             */
-/*   Updated: 2019/11/07 20:37:45 by yvanat           ###   ########.fr       */
+/*   Updated: 2019/11/08 19:56:59 by yvanat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct	s_data
 	char		ag;
 	char		ab;
 	double		al;
+	int			*scene;
 	t_list		*camera;
 	t_list		*light;
 	t_list		*plane;
@@ -74,9 +75,21 @@ int				parse_sq(t_data *data, char *buffer, int i);
 int				parse_cy(t_data *data, char *buffer, int i);
 int				parse_tr(t_data *data, char *buffer, int i);
 int				white_space(char c);
+int				ft_isdigit(int c);
+int				parse_rgb(t_data *data, char *buffer, int i, t_list *tmp);
+int				parse_xyz(t_data *data, char *buffer, int i, t_list *tmp);
+int				parse_y(t_data *data, char *buffer, int i, t_list *tmp);
+int				parse_z(t_data *data, char *buffer, int i, t_list *tmp);
+int				parse_xxyyzz(t_data *data, char *buffer, in it, t_list *tmp);
+int				parse_yy(t_data *data, char *buffer, int i, t_list *tmp);
+int				parse_zz(t_data *data, char *buffer, int i, t_list *tmp);
+int				parse_xxxyyyzzz(t_data *data, char *buffer, int i, t_list *tmp);
+int				parse_yyy(t_data *data, char *buffer, int i, t_list *tmp);
+int				parse_zzz(t_data *data, char *buffer, int i, t_list *tmp);
 void			ft_parse(char *file, t_data *data);
 void			ft_free(t_data *data);
 void			put_error(ssize_t size);
 void			data_init(t_list *data);
+void			scene_matrix(t_data *data);
 
 #endif

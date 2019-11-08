@@ -6,7 +6,7 @@
 /*   By: yvanat <yvanat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 17:32:18 by yvanat            #+#    #+#             */
-/*   Updated: 2019/11/06 19:12:30 by yvanat           ###   ########.fr       */
+/*   Updated: 2019/11/08 11:05:29 by yvanat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ void	ft_parse(char *file, t_data *data)
 		ft_free(data);
 	}
 	buffer[size] = '\0';
-	i = -1;
-	while (buffer[++i] != '\0')
+	i = 0;
+	while (buffer[i] != '\0')
 		i = parse_call(data, buffer, i);
 	free(buffer);
 }
