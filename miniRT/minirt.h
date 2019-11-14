@@ -6,7 +6,7 @@
 /*   By: yvanat <yvanat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 14:05:57 by yvanat            #+#    #+#             */
-/*   Updated: 2019/11/08 19:56:59 by yvanat           ###   ########.fr       */
+/*   Updated: 2019/11/14 15:42:07 by yvanat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,9 @@ void			ft_free(t_data *data);
 void			put_error(ssize_t size);
 void			data_init(t_list *data);
 void			scene_matrix(t_data *data);
+void			max_sphere(t_data *data, double *xyz);
+void			max_square(t_data *data, double *xyz);
+void			max_cylinder(t_data *data, double *xyz);
+void			max_triangle(t_data *data, double *xyz);
 
 #endif
