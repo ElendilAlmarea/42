@@ -6,7 +6,7 @@
 /*   By: yvanat <yvanat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 13:20:49 by yvanat            #+#    #+#             */
-/*   Updated: 2019/11/14 16:11:00 by yvanat           ###   ########.fr       */
+/*   Updated: 2019/11/15 18:57:46 by yvanat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,18 @@ void	scene_matrix(t_data *data)
 	max_square(data, xyz);
 	max_cylinder(data, xyz);
 	max_triangle(data, xyz);
-	i = (xyz[0] - xyz[1] + 1) * (xyz[2] - xyz[3] + 1) * (xyz[4] - xyz[5] + 1);
+	data->x_bias = xyz[1];
+	data->y_bias = xyz[3];
+	data->z_bias = xyz[5];
+	data->x = (int)round(xyz[0] - xyz[1] + 1);
+	data->y = (int)round(xyz[2] - xyz[3] + 1);
+	data->z = (int)round(xyz[4] - xyz[5] + 1);
+	i = data->x * data->y * data->z;
 	if (!(data->scene = malloc(sizeof(int) * i)))
 		ft_free(data);
 	while (i--)
 		(data->scene)[i] = 0;
+	fill_scene(data);
 }
 
 void	max_sphere(t_data *data, double *xyz)

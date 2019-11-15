@@ -6,7 +6,7 @@
 /*   By: yvanat <yvanat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 14:05:57 by yvanat            #+#    #+#             */
-/*   Updated: 2019/11/14 15:42:07 by yvanat           ###   ########.fr       */
+/*   Updated: 2019/11/15 19:31:00 by yvanat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,12 @@ typedef struct	s_data
 	char		ag;
 	char		ab;
 	double		al;
+	double		x_bias;
+	double		y_bias;
+	double		z_bias;
+	int			x;
+	int			y;
+	int			z;
 	int			*scene;
 	t_list		*camera;
 	t_list		*light;
@@ -95,5 +101,11 @@ void			max_sphere(t_data *data, double *xyz);
 void			max_square(t_data *data, double *xyz);
 void			max_cylinder(t_data *data, double *xyz);
 void			max_triangle(t_data *data, double *xyz);
+void			fill_scene(t_data *data);
+void			fill_plane(t_data *data);
+void			fill_sphere(t_data *data);
+void			fill_square(t_data *data);
+void			fill_cylinder(t_data *data);
+void			fill_triangle(t_data *data);
 
 #endif

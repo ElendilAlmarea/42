@@ -14,7 +14,8 @@ SRC =		main.c \
 			parse_funcs2.c \
 			parse_funcs3.c \
 			raytracer1.c \
-			raytracer2.c
+			raytracer2.c \
+			raytracer3.c
 
 $(NAME):
 			${CC} ${CFLAGS} ${SRC} -o ${NAME}
