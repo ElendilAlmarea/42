@@ -6,7 +6,7 @@
 /*   By: yvanat <yvanat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 14:05:57 by yvanat            #+#    #+#             */
-/*   Updated: 2019/11/18 13:09:09 by yvanat           ###   ########.fr       */
+/*   Updated: 2019/12/06 17:00:30 by yvanat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,5 +107,6 @@ void			fill_sphere(t_data *data, t_list *tmp);
 void			fill_square(t_data *data, t_list *tmp);
 void			fill_cylinder(t_data *data, t_list *tmp);
 void			fill_triangle(t_data *data, t_list *tmp);
+void			raytracing(t_data *data);
 
 #endif
