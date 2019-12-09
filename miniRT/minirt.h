@@ -6,7 +6,7 @@
 /*   By: yvanat <yvanat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 14:05:57 by yvanat            #+#    #+#             */
-/*   Updated: 2019/12/06 17:00:30 by yvanat           ###   ########.fr       */
+/*   Updated: 2019/12/09 15:20:19 by yvanat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@
 
 typedef struct	s_list
 {
-	char			r;
-	char			g;
-	char			b;
+	unsigned char	r;
+	unsigned char	g;
+	unsigned char	b;
 	double			x;
 	double			y;
 	double			z;
@@ -41,29 +41,29 @@ typedef struct	s_list
 
 typedef struct	s_data
 {
-    void		*mlx_ptr;
-    void		*win_ptr;
-	void		*img_ptr;
-	int			rx;
-	int			ry;
-	char		ar;
-	char		ag;
-	char		ab;
-	double		al;
-	double		x_bias;
-	double		y_bias;
-	double		z_bias;
-	int			x;
-	int			y;
-	int			z;
-	int			*scene;
-	t_list		*camera;
-	t_list		*light;
-	t_list		*plane;
-	t_list		*sphere;
-	t_list		*square;
-	t_list		*cylinder;
-	t_list		*triangle;
+    void			*mlx_ptr;
+    void			*win_ptr;
+	void			*img_ptr;
+	int				rx;
+	int				ry;
+	unsigned char	ar;
+	unsigned char	ag;
+	unsigned char	ab;
+	double			al;
+	double			x_bias;
+	double			y_bias;
+	double			z_bias;
+	int				x;
+	int				y;
+	int				z;
+	int				*scene;
+	t_list			*camera;
+	t_list			*light;
+	t_list			*plane;
+	t_list			*sphere;
+	t_list			*square;
+	t_list			*cylinder;
+	t_list			*triangle;
 }				t_data;
 
 int				key_hook(int keycode, t_data *data);
@@ -86,7 +86,7 @@ int				parse_rgb(t_data *data, char *buffer, int i, t_list *tmp);
 int				parse_xyz(t_data *data, char *buffer, int i, t_list *tmp);
 int				parse_y(t_data *data, char *buffer, int i, t_list *tmp);
 int				parse_z(t_data *data, char *buffer, int i, t_list *tmp);
-int				parse_xxyyzz(t_data *data, char *buffer, in it, t_list *tmp);
+int				parse_xxyyzz(t_data *data, char *buffer, int i, t_list *tmp);
 int				parse_yy(t_data *data, char *buffer, int i, t_list *tmp);
 int				parse_zz(t_data *data, char *buffer, int i, t_list *tmp);
 int				parse_xxxyyyzzz(t_data *data, char *buffer, int i, t_list *tmp);
@@ -95,7 +95,7 @@ int				parse_zzz(t_data *data, char *buffer, int i, t_list *tmp);
 void			ft_parse(char *file, t_data *data);
 void			ft_free(t_data *data);
 void			put_error(ssize_t size);
-void			data_init(t_list *data);
+void			data_init(t_data *data);
 void			scene_matrix(t_data *data);
 void			max_sphere(t_data *data, double *xyz);
 void			max_square(t_data *data, double *xyz);

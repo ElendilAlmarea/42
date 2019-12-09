@@ -6,7 +6,7 @@
 /*   By: yvanat <yvanat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 17:32:18 by yvanat            #+#    #+#             */
-/*   Updated: 2019/11/08 11:05:29 by yvanat           ###   ########.fr       */
+/*   Updated: 2019/12/09 15:24:10 by yvanat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,16 @@
 
 int		parse_call(t_data *data, char *buffer, int i)
 {
+	if (buffer[i] == 'p' && buffer[i + 1] == 'l')
+		return (parse_pl(data, buffer, i));
+	if (buffer[i] == 's' && buffer[i + 1] == 'p')
+		return (parse_sp(data, buffer, i));
+	if (buffer[i] == 's' && buffer[i + 1] == 'q')
+		return (parse_sq(data, buffer, i));
+	if (buffer[i] == 'c' && buffer[i + 1] == 'y')
+		return (parse_cy(data, buffer, i));
+	if (buffer[i] == 't' && buffer[i + 1] == 'r')
+		return (parse_tr(data, buffer, i));
 	if (buffer[i] == 'R')
 		return (parse_r(data, buffer, i));
 	if (buffer[i] == 'A')
@@ -22,16 +32,6 @@ int		parse_call(t_data *data, char *buffer, int i)
 		return (parse_c(data, buffer, i));
 	if (buffer[i] == 'l')
 		return (parse_l(data, buffer, i));
-	if (buffer[i] == 'p' && buffer[i] == 'l')
-		return (parse_pl(data, buffer, i));
-	if (buffer[i] == 's' && buffer[i] == 'p')
-		return (parse_sp(data, buffer, i));
-	if (buffer[i] == 's' && buffer[i] == 'q')
-		return (parse_sq(data, buffer, i));
-	if (buffer[i] == 'c' && buffer[i] == 'y')
-		return (parse_cy(data, buffer, i));
-	if (buffer[i] == 't' && buffer[i] == 'r')
-		return (parse_tr(data, buffer, i));
 	put_error(1);
 	free(buffer);
 	ft_free(data);
@@ -44,15 +44,17 @@ void	ft_parse(char *file, t_data *data)
 	ssize_t	size;
 	int		i;
 
-	if (!(buffer = malloc(10001)))
+	if (!(buffer = malloc(10003)))
 		ft_free(data);
-	if ((size = read(open(file, O_RDONLY), buffer, 10000)) > 0)
+	if ((size = read(open(file, O_RDONLY), buffer, 10000)) <= 0)
 	{
 		put_error(size);
 		free(buffer);
 		ft_free(data);
 	}
 	buffer[size] = '\0';
+	buffer[size + 1] = '\0';
+	buffer[size + 2] = '\0';
 	i = 0;
 	while (buffer[i] != '\0')
 		i = parse_call(data, buffer, i);

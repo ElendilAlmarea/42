@@ -6,7 +6,7 @@
 /*   By: yvanat <yvanat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 19:12:17 by yvanat            #+#    #+#             */
-/*   Updated: 2019/11/08 19:52:32 by yvanat           ###   ########.fr       */
+/*   Updated: 2019/12/09 14:51:37 by yvanat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	parse_pl(t_data *data, char *buffer, int i)
 	t_list *tmp;
 
 	tmp = data->plane;
-	while (tmp)
+	while (tmp->next)
 		tmp = tmp->next;
 	if (!(tmp->next = malloc(sizeof(t_list))))
 	{
@@ -37,7 +37,7 @@ int	parse_sp(t_data *data, char *buffer, int i)
 	double	j;
 
 	tmp = data->sphere;
-	while (tmp)
+	while (tmp->next)
 		tmp = tmp->next;
 	if (!(tmp->next = malloc(sizeof(t_list))))
 	{
@@ -66,7 +66,7 @@ int	parse_sq(t_data *data, char *buffer, int i)
 	double	j;
 
 	tmp = data->square;
-	while (tmp)
+	while (tmp->next)
 		tmp = tmp->next;
 	if (!(tmp->next = malloc(sizeof(t_list))))
 	{
@@ -96,7 +96,7 @@ int	parse_cy(t_data *data, char *buffer, int i)
 	double	j;
 
 	tmp = data->cylinder;
-	while (tmp)
+	while (tmp->next)
 		tmp = tmp->next;
 	if (!(tmp->next = malloc(sizeof(t_list))))
 	{
@@ -137,7 +137,7 @@ int	parse_tr(t_data *data, char *buffer, int i)
 	double	j;
 
 	tmp = data->triangle;
-	while (tmp)
+	while (tmp->next)
 		tmp = tmp->next;
 	if (!(tmp->next = malloc(sizeof(t_list))))
 	{
