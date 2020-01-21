@@ -6,7 +6,7 @@
 /*   By: yvanat <yvanat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 17:48:02 by yvanat            #+#    #+#             */
-/*   Updated: 2019/11/18 13:08:52 by yvanat           ###   ########.fr       */
+/*   Updated: 2019/12/08 20:21:24 by yvanat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,37 @@ int		ft_isdigit(int c)
 	return (0);
 }
 
-void	data_init(t_list *data)
+void	ft_free(t_data *data)
 {
-	data->camera = NULL;
-	data->light = NULL;
-	data->plane = NULL;
-	data->sphere = NULL;
-	data->square = NULL;
-	data->cylinder= NULL;
-	data->triangle = NULL;
+	return ;
+}
+
+void	data_init(t_data *data)
+{
+	if (!(data->camera = malloc(sizeof(t_list))))
+		ft_free(data);
+	data->camera->next = NULL;
+	if (!(data->light = malloc(sizeof(t_list))))
+		ft_free(data);
+	data->light->next = NULL;
+	if (!(data->plane = malloc(sizeof(t_list))))
+		ft_free(data);
+	data->plane->next = NULL;
+	if (!(data->sphere = malloc(sizeof(t_list))))
+		ft_free(data);
+	data->sphere->next = NULL;
+	if (!(data->square = malloc(sizeof(t_list))))
+		ft_free(data);
+	data->square->next = NULL;
+	if (!(data->cylinder = malloc(sizeof(t_list))))
+		ft_free(data);
+	data->cylinder->next= NULL;
+	if (!(data->triangle = malloc(sizeof(t_list))))
+		ft_free(data);
+	data->triangle->next = NULL;
+}
+
+void	put_error(ssize_t size)
+{
+	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: yvanat <yvanat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 19:11:56 by yvanat            #+#    #+#             */
-/*   Updated: 2019/11/08 19:40:30 by yvanat           ###   ########.fr       */
+/*   Updated: 2019/12/08 20:23:01 by yvanat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	parse_c(t_data *data, char *buffer, int i)
 	t_list	*tmp;
 
 	tmp = data->camera;
-	while (tmp)
+	while (tmp->next)
 		tmp = tmp->next;
 	if (!(tmp->next = malloc(sizeof(t_list))))
 	{
@@ -79,7 +79,7 @@ int	parse_l(t_data *data, char *buffer, int i)
 	double	j;
 
 	tmp = data->light;
-	while (tmp)
+	while (tmp->next)
 		tmp = tmp->next;
 	if (!(tmp->next = malloc(sizeof(t_list))))
 	{

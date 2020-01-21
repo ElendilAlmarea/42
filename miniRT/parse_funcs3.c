@@ -6,7 +6,7 @@
 /*   By: yvanat <yvanat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 19:55:56 by yvanat            #+#    #+#             */
-/*   Updated: 2019/11/08 19:56:04 by yvanat           ###   ########.fr       */
+/*   Updated: 2019/12/09 15:15:43 by yvanat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,5 @@ int	parse_zzz(t_data *data, char *buffer, int i, t_list *tmp)
 		}
 	if (neg++ == '-')
 		tmp->next->zzz *= -1;
-	while (white_space(buffer[++i]));
 	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: yvanat <yvanat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 13:20:49 by yvanat            #+#    #+#             */
-/*   Updated: 2019/11/18 14:17:02 by yvanat           ###   ########.fr       */
+/*   Updated: 2019/12/09 19:19:04 by yvanat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	max_sphere(t_data *data, double *xyz)
 	t_list	*tmp;
 	double	r;
 
-	tmp = data->sphere;
+	tmp = data->sphere->next;
 	while (tmp)
 	{
 		r = tmp->xx / 2;
@@ -59,7 +59,7 @@ void	max_square(t_data *data, double *xyz)
 	t_list	*tmp;
 	double	h;
 
-	tmp = data->square;
+	tmp = data->square->next;
 	while (tmp)
 	{
 		h = tmp->xx > tmp->yy ? tmp->xx : tmp->yy;
@@ -82,7 +82,7 @@ void	max_cylinder(t_data *data, double *xyz)
 	double	h;
 	double	c;
 
-	tmp = data->cylinder;
+	tmp = data->cylinder->next;
 	while (tmp)
 	{
 		r = tmp->xx > tmp->yy ? tmp->xx : tmp->yy;
@@ -93,7 +93,6 @@ void	max_cylinder(t_data *data, double *xyz)
 		c = r * (1 - fabs(tmp->xx));
 		xyz[0] = tmp->x + c > xyz[0] ? tmp->x + c : xyz[0];
 		xyz[1] = tmp->x - c < xyz[1] ? tmp->x - c : xyz[1];
-		xyz[0] = 
 		c = r * (1 - fabs(tmp->yy));
 		xyz[2] = tmp->y + c > xyz[2] ? tmp->y + c : xyz[2];
 		xyz[3] = tmp->y - c < xyz[3] ? tmp->y - c : xyz[3];
@@ -108,7 +107,7 @@ void	max_triangle(t_data *data, double *xyz)
 {
 	t_list	*tmp;
 
-	tmp = data->triangle;
+	tmp = data->triangle->next;
 	while (tmp)
 	{
 		xyz[0] = tmp->x > xyz[0] ? tmp->x : xyz[0];

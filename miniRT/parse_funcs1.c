@@ -6,7 +6,7 @@
 /*   By: yvanat <yvanat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 18:32:51 by yvanat            #+#    #+#             */
-/*   Updated: 2019/11/08 19:26:45 by yvanat           ###   ########.fr       */
+/*   Updated: 2019/12/08 20:09:38 by yvanat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,22 @@
 
 int	white_space(char c)
 {
-	return (!(c != ' ' && c != 'f' && c != 'n' && c != 'r'
-		&& c != 't' && c != 'v'));
+	return (!(c != ' ' && c != '\f' && c != '\n' && c != '\r'
+		&& c != '\t' && c != '\v'));
 }
 
 int	parse_rgb(t_data *data, char *buffer, int i, t_list *tmp)
 {
 	while (white_space(buffer[++i]));
-	tmp->next->ar = buffer[i] - 48;
+	tmp->next->r = buffer[i] - 48;
 	while (ft_isdigit(buffer[++i]))
-		tmp->next->ar = tmp->next->ar * 10 + buffer[i] - 48;
-	tmp->next->ag = buffer[++i] - 48;
+		tmp->next->r = tmp->next->r * 10 + buffer[i] - 48;
+	tmp->next->g = buffer[++i] - 48;
 	while (ft_isdigit(buffer[++i]))
-		tmp->next->ag = tmp->next->ag * 10 + buffer[i] - 48;
-	tmp->next->ab = buffer[++i] - 48;
+		tmp->next->g = tmp->next->g * 10 + buffer[i] - 48;
+	tmp->next->b = buffer[++i] - 48;
 	while (ft_isdigit(buffer[++i]))
-		tmp->next->ab = tmp->next->ab * 10 + buffer[i] - 48;
+		tmp->next->b = tmp->next->b * 10 + buffer[i] - 48;
 	while (white_space(buffer[++i]));
 	return (i);
 }
