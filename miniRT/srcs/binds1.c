@@ -6,7 +6,7 @@
 /*   By: yvanat <yvanat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 23:10:33 by yvanat            #+#    #+#             */
-/*   Updated: 2020/02/07 23:10:35 by yvanat           ###   ########.fr       */
+/*   Updated: 2020/02/08 03:08:09 by yvanat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,11 @@ int				quit(int rt, void *swap)
 	t_swap	*s;
 	int		i;
 
+
 	i = -1;
 	s = (t_swap*)swap;
+	if (rt)
+		exit(0);
 	while (++i < s->p.nb_objs)
 		free(s->p.objs[i].o);
 	exit(rt != -1 ? 0 : -1);
