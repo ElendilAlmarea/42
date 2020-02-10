@@ -13,17 +13,17 @@
  */
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define( 'DB_NAME', 'wordpress' );
+define('DB_NAME', 'wordpress');
 /** MySQL database username */
-define( 'DB_USER', 'root' );
+define('DB_USER', 'root');
 /** MySQL database password */
-define( 'DB_PASSWORD', '' );
+define('DB_PASSWORD', '');
 /** MySQL hostname */
-define( 'DB_HOST', 'localhost' );
+define('DB_HOST', 'localhost');
 /** Charset for database tables. */
-define( 'DB_CHARSET', 'utf8' );
+define('DB_CHARSET', 'utf8');
 /** The Database Collate type. mysql auto-assigns it if blank */
-define( 'DB_COLLATE', '' );
+define('DB_COLLATE', '');
 
 /* Authentication Unique Keys and Salts.
  * You can change these at any point in time to invalidate all existing cookies.
@@ -46,8 +46,9 @@ define('NONCE_SALT',       'ijK{HD+(gH1)*@v!U|8`Ip^b-`?mkbS-`9Npv+4bbJ>d&</Os`<w
 $table_prefix = 'wp_';
 
 /** Absolute path to the WordPress directory. */
-if ( ! defined( 'ABSPATH' ) ) {
-	define( 'ABSPATH', dirname( __FILE__ ) . '/' );
+if (!defined('ABSPATH')) {
+	define('ABSPATH', dirname( __FILE__ ).'/');
 }
 /** Set up */
-require_once( ABSPATH . 'wp-settings.php' );
+require_once(ABSPATH.'wp-settings.php');
+?>
