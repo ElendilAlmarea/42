@@ -25,14 +25,15 @@ section	.bss
 
 section	.text
 start:
+	mov		rdi, 1
 	mov		rsi, msg			;test ft_write
 	mov		rdx, len_msg
 	call	_ft_write
+	mov		rdi, 1
 	mov		rsi, msg
 	mov		rdx, len_msg
 	call	_write
 	mov		rdi, msg			;test ft_strlen
-	jmp		fail				;EXPLAIN ME PLS WHY THIS DOESNT JUMP AND JUST BEFORE YES
 	call	_ft_strlen
 	mov		rcx, rax
 	mov		rdi, msg
@@ -45,6 +46,7 @@ start:
 	jmp		end
 
 fail:
+	mov		rdi, 1
 	mov		rsi, msg_fail
 	mov		rdx, len_fail
 	call	_ft_write
