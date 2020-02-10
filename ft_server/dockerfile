@@ -3,6 +3,6 @@ COPY ./srcs/start.sh .
 COPY ./srcs/config ./root/
 COPY ./srcs/config.inc.php ./root/
 COPY ./srcs/wp-config.php ./root/
-COPY ./srcs/wordpressconf.sql ./root/
+COPY ./srcs/wpconfig.sql ./root/
 COPY ./srcs/mk_ssl_crt.sh ./root/
 CMD bash start.sh && tail -f /dev/null

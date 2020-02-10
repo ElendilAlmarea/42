@@ -41,7 +41,7 @@ chmod 755 /var/www/html/site
 tar xzf /tmp/latest.tar.gz --strip-components=1 -C /var/www/html/site/
 cp /root/wp-config.php /var/www/html/site/wp-config.php
 chown -R root:root /var/www/html/site
-mysql wordpress < /root/wordpressconf.sql
+mysql wordpress < /root/wpconfig.sql
 
 #make SSL certif
 sh mk_ssl_crt.sh
