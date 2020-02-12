@@ -25,8 +25,8 @@ section	.bss
 
 section	.text
 start:
-	mov		rdi, 1
-	mov		rsi, msg			;test ft_write
+	mov		rdi, 1				;test ft_write
+	mov		rsi, msg
 	mov		rdx, len_msg
 	call	_ft_write
 	mov		rdi, 1
@@ -40,6 +40,7 @@ start:
 	call	_strlen
 	cmp		rax, rcx
 	jnz		fail
+	mov		rdi, 1
 	mov		rsi, msg_success
 	mov		rdx, len_success
 	call	_ft_write
