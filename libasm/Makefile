@@ -15,7 +15,7 @@ SRC =			ft_strcpy.s\
 
 OBJ =			$(patsubst %.s, $(OBJ_DIR)/%.o, $(SRC))
 
-$(NAME): $(OBJ)				
+$(NAME): $(OBJ)	main.s
 				ar rc $(NAME) $(OBJ)
 				ranlib $(NAME)
 				$(ASMC) $(ASMFLAGS) main.s

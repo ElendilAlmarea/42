@@ -17,6 +17,7 @@ section	.data
 	msg			db	'This is a sentence.', 0ah, 0h
 	msg_success	db	'Success!', 0ah, 0h
 	msg_fail	db	'Fail...', 0ah, 0h
+	msg_cpy		db	'                    ', 0ah, 0h
 
 section	.bss
 	len_msg		equ	20
@@ -25,7 +26,8 @@ section	.bss
 
 section	.text
 start:
-	mov		rdi, 1				;test ft_write
+	push 	rbx					;test ft_write
+	mov		rdi, 1
 	mov		rsi, msg
 	mov		rdx, len_msg
 	call	_ft_write
@@ -33,15 +35,58 @@ start:
 	mov		rsi, msg
 	mov		rdx, len_msg
 	call	_write
+	pop		rbx
 	mov		rdi, msg			;test ft_strlen
 	call	_ft_strlen
-	mov		rcx, rax
+	push	rax
 	mov		rdi, msg
 	call	_strlen
+	pop		rcx
 	cmp		rax, rcx
 	jnz		fail
 	mov		rdi, 1
 	mov		rsi, msg_success
+	mov		rdx, len_success
+	call	_ft_write
+	mov		rdi, msg_success	;test ft_strcmp
+	mov		rsi, msg_fail
+	call	_ft_strcmp
+	push	rax
+	mov		rdi, msg_success
+	mov		rsi, msg_fail
+	call	_strcmp
+	pop		rcx
+	cmp		rax, rcx
+	jnz		fail
+	mov		rdi, 1
+	mov		rsi, msg_success
+	mov		rdx, len_success
+	call	_ft_write
+	mov		rdi, msg_success
+	mov		rsi, msg_success
+	call	_ft_strcmp
+	push	rax
+	mov		rdi, msg_success
+	mov		rsi, msg_success
+	call	_strcmp
+	pop		rcx
+	cmp		rax, rcx
+	jnz		fail
+	mov		rdi, 1
+	mov		rsi, msg_success
+	mov		rdx, len_success
+	call	_ft_write
+	mov		rdi, msg_cpy		;test ft_strcpy
+	mov		rsi, msg
+	call	_ft_strcpy
+	mov		rdi, 1
+	mov		rsi, msg_cpy
+	mov		rdx, len_msg
+	call	_ft_write
+	mov		rdi, msg_success	;test ft_strdup
+	call	_ft_strdup
+	mov		rsi, rax
+	mov		rdi, 1
 	mov		rdx, len_success
 	call	_ft_write
 	jmp		end
