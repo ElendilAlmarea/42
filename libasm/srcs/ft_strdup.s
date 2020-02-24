@@ -4,17 +4,16 @@
 	extern	_ft_strcpy
 
 _ft_strdup:
-	push	rdi
 	call	_ft_strlen
+	push	rdi
+	inc		rax
 	mov		rdi, rax
-	inc		rdi
-	push	rbx
 	call	_malloc
-	pop		rbx
-	mov		rdi, rax
-	pop		rsi
-	cmp		rsi, 0
+	pop		rdi
+	cmp		rax, 0
 	jz		end
+	mov		rsi, rdi
+	mov		rdi, rax
 	call	_ft_strcpy
 	ret
 

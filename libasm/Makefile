@@ -15,11 +15,12 @@ SRC =			ft_strcpy.s\
 
 OBJ =			$(patsubst %.s, $(OBJ_DIR)/%.o, $(SRC))
 
-$(NAME): $(OBJ)	main.s
+$(NAME): $(OBJ)	main.s main.c
 				ar rc $(NAME) $(OBJ)
 				ranlib $(NAME)
-				$(ASMC) $(ASMFLAGS) main.s
-				ld -macosx_version_min 10.7.0 -lSystem main.o libasm.a && ./a.out
+				$(CC) $(CFLAGS) $(NAME) main.c && ./a.out
+				#$(ASMC) $(ASMFLAGS) main.s
+				#ld -macosx_version_min 10.7.0 -lSystem main.o libasm.a && ./a.out
 
 $(OBJ_DIR)/%.o : $(SRC_DIR)/%.s Makefile
 				mkdir -p $(OBJ_DIR)
