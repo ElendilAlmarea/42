@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: Service
+metadata:
+    name: nginx
+    labels:
+        app: ft_services
+spec:
+    ports:
+        - port: 80
+          name: http
+        - port: 443
+          name: https
+    selector:
+        app: ft_services
+        tier: nginx
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: nginx
+    labels:
+        app: ft_services
+spec:
+    replicas: 3
+    selector:
+        matchLabels:
+            app: ft_services
+            tier: nginx
+        strategy:
+            type: Recreate
+        template:
+            metadata:
+                labels:
+                    app: ft_services
+                    tier: nginx
+            spec:
+                restarPolicy: Always
+                containers:
+                - name: nginx
+                  image: nginx_alpine
+                  imagePullPolicy: Never
+                  ports:
+                  - containerPort: 80
+                    name: http
+                  - containerPort: 443
+                    name: https
