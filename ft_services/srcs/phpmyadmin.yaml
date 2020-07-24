@@ -1,0 +1,48 @@
+apiVersion: V1
+kind: Service
+metadata:
+    name: phpmyadmin
+    labels:
+        app: ft_services
+spec:
+    ports:
+    - port: 80
+    selector:
+        app: ft_services
+        tier: admin
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: phpmyadmin
+    labels:
+        app: ft_services
+spec:
+    replicas: 1
+    strategy:
+        type: Recreate
+    selector:
+        matchLabels:
+            app: ft_services
+            tier: admin
+    template:
+        metadata:
+            labels:
+                app: ft_services
+                tier: admin
+        spec:
+            restartPolicy: Always
+            containers:
+            - name: phpmyadmin
+              image: phpmyadmin_alpine
+              imagePullPolicy: Never
+              env:
+              - name: MYSQL_HOSTNAME
+                value: mysql
+              - name: PMA_USERNAME
+                value: root
+              - name: PMA_PASSWORD
+                value: password
+              ports:
+              - containerPort: 80
+                hostPort: 5000
