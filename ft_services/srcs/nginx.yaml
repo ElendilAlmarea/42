@@ -26,21 +26,21 @@ spec:
         matchLabels:
             app: ft_services
             tier: nginx
-        strategy:
-            type: Recreate
-        template:
-            metadata:
-                labels:
-                    app: ft_services
-                    tier: nginx
-            spec:
-                restarPolicy: Always
-                containers:
-                - name: nginx
-                  image: nginx_alpine
-                  imagePullPolicy: Never
-                  ports:
-                  - containerPort: 80
-                    name: http
-                  - containerPort: 443
-                    name: https
+    strategy:
+        type: Recreate
+    template:
+        metadata:
+            labels:
+                app: ft_services
+                tier: nginx
+        spec:
+            restartPolicy: Always
+            containers:
+            - name: nginx
+              image: nginx_alpine
+              imagePullPolicy: Never
+              ports:
+              - containerPort: 80
+                name: http
+              - containerPort: 443
+                name: https

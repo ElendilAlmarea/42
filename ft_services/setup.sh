@@ -18,13 +18,16 @@ fi
 
 MINIKUBE_IP=$(minikube ip)
 
-cp srcs/wordpress/wpconfig.sql srcs/wordpress/wpconfig_tmp.sql
-sed -i '' "s/MINIKUBE_IP/$MINIKUBE_IP/g" srcs/wordpress/wpconfig_tmp.sql
+#cp srcs/wordpress/wpconfig.sql srcs/wordpress/wpconfig-target.sql
+#sed -i '' "s/##MINIKUBE_IP##/$MINIKUBE_IP/g" srcs/wordpress/wpconfig-target.sql
+#cp srcs/ftps/entrypoint srcs/ftps/entrypoint-target
+#sed -i '' "s/##MINIKUBE_IP##/$MINIKUBE_IP/g" srcs/ftps/entrypoint-target
 
 eval $(minikube docker-env)
 docker build -t nginx_alpine srcs/nginx
-docker build -t mysql_alpine srcs/mysql
-docker build -t wordpress_alpine srcs/wordpress
+#docker build -t mysql_alpine srcs/mysql
+#docker build -t wordpress_alpine srcs/wordpress
+#docker build -t ftps_alpine srcs/ftps
 
 if [ "$1" = "delete" ]
 then
