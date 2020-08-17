@@ -1,6 +1,11 @@
-configMapGenerator:
-- name: nginx-config
-  files:
-  - nginx/nginx.conf
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
 resources:
-- nginx.yaml
+ # - metallb.yaml
+  - nginx.yaml
+  #- phpmyadmin.yaml
+  #- wordpress.yaml
+  #- mysql.yaml
+  #- influxdb.yaml
+  #- grafana.yaml
+  #- ftps.yaml

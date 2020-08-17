@@ -6,7 +6,9 @@ metadata:
         app: ft_services
 spec:
     ports:
-        - port: 80
+        - port: 5050
+        targetPort: 5050
+        protocol: TCP
     selector:
         app: ft_services
         tier: frontend
@@ -59,7 +61,7 @@ spec:
                         name: mysql-pass
                         key: password
                 ports:
-                - containerPort: 80
+                - containerPort: 5050
                   hostPort: 5050
                 volumeMounts:
                 - name: wordpress-persistent-storage
