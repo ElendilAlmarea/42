@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yvanat <yvanat@42.student.fr>              +#+  +:+       +#+        */
+/*   By: yvanat <yvanat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 15:39:15 by yvanat            #+#    #+#             */
-/*   Updated: 2020/02/24 16:16:38 by yvanat           ###   ########.fr       */
+/*   Updated: 2020/08/17 19:22:29 by yvanat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <string.h>
 #include <libc.h>
 #include <unistd.h>
+#include <errno.h>
 
 int		ft_strlen(char *str);
 char	*ft_strcpy(char *dst, const char *src);
@@ -29,7 +30,8 @@ int		main(void)
 	char	buffer[1000];
 
 	printf("\nTests libasm\n\n");
-	ft_write(1, "Test de ft_write\n\n", 18);
+	if (ft_write(1, "Test de ft_write\n\n", 18) == -1)
+		perror("write");
 	printf("Test de ft_strcmp memes chaines : %d, et chaines differentes : %d\n",
 			ft_strcmp("test", "test"), ft_strcmp("test1", "test2"));
 	printf("Test de strcmp memes chaines : %d, et chaines differentes : %d\n\n",
@@ -41,6 +43,8 @@ int		main(void)
 	size = read(0, buffer, 999);
 	if (size > 0)
 		buffer[(int)size] = '\0';
+	if (size == -1)
+		perror("read");
 	write(1, buffer, size);
 	return (0);
 }
