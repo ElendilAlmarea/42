@@ -1,5 +1,5 @@
 	global	_ft_read
-	extern	__errno_location
+	extern	___error
 
 _ft_read:
 	mov		rax, 0x2000003
@@ -13,7 +13,7 @@ error:
 			mov			rax, -1
 			mul			r8
 			push		rax
-			call        __errno_location
+			call        ___error
 			pop			r8
 			mov			[rax], r8
 			mov			rax, -1
