@@ -2,10 +2,10 @@
 
 Contact::Contact() {
 	index = 0;
-		fields[0] = "first name", fields[1] = "last name", fields[2] = "nickname", fields[3] = "login";
-		fields[4] = "postal address", fields[5] = "email address", fields[6] = "phone number";
-		fields[7] = "birthday date", fields[8] = "favorite meal", fields[9] = "underwear color";
-		fields[10] = "darkest secret";
+	fields[0] = "first name", fields[1] = "last name", fields[2] = "nickname", fields[3] = "login";
+	fields[4] = "postal address", fields[5] = "email address", fields[6] = "phone number";
+	fields[7] = "birthday date", fields[8] = "favorite meal", fields[9] = "underwear color";
+	fields[10] = "darkest secret";
 }
 
 void Contact::add_contact() {
