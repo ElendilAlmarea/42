@@ -10,7 +10,6 @@ class Pony {
 	private:
 		bool		unicorn;
 		int			legs;
-		std::string	sound;
 };
 
 Pony	ponyOnTheStack();

@@ -12,6 +12,7 @@ spec:
     selector:
         app: ft_services
         tier: frontend
+    type: LoadBalancer
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim

@@ -7,10 +7,12 @@ metadata:
 spec:
     ports:
     - port: 3306
+      targetPort: 3306
+      name: mysql_port
     selector:
         app: ft_services
         tier: mysql
-    clusterIP: None
+    type: clusterIP
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -61,7 +63,7 @@ spec:
                     value: password
                   ports:
                   - containerPort: 3306
-                    name: mysql
+                    name: mysql_port
                   volumeMounts:
                   - name: mysql-persistent-storage
                     mountPath: /app/mysql

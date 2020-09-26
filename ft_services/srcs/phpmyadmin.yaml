@@ -6,10 +6,14 @@ metadata:
         app: ft_services
 spec:
     ports:
-    - port: 80
+    - ports: 5000
+      targetPort: 5000
+      protocol: TCP
+      name: phpmyadmin_port
     selector:
         app: ft_services
         tier: admin
+    type: LoadBalancer
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -44,5 +48,4 @@ spec:
               - name: PMA_PASSWORD
                 value: password
               ports:
-              - containerPort: 80
-                hostPort: 5000
+              - containerPort: 5000

@@ -16,24 +16,32 @@ then
 	minikube addons enable dashboard
 fi
 
-#kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/namespace.yaml
-#kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/metallb.yaml
-#kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/namespace.yaml
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/metallb.yaml
+kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
+kubectl delete deployments --all
+kubectl delete svc --all
+ftps_ip='192.168.99.110'
+grafana_ip='192.168.99.111'
+nginx_ip='192.168.99.112'
+phpmyadmin_ip='192.168.99.113'
+wordpress_ip='192.168.99.114'
 
 MINIKUBE_IP=$(minikube ip)
 
-#cp srcs/wordpress/wpconfig.sql srcs/wordpress/wpconfig-target.sql
-#sed -i '' "s/##MINIKUBE_IP##/$MINIKUBE_IP/g" srcs/wordpress/wpconfig-target.sql
-#cp srcs/ftps/entrypoint srcs/ftps/entrypoint-target
-#sed -i '' "s/##MINIKUBE_IP##/$MINIKUBE_IP/g" srcs/ftps/entrypoint-target
-#cp srcs/metallb.yaml srcs/metallb-target.yaml
-#sed -i '' "s/##MINIKUBE_IP##/$MINIKUBE_IP/g" srcs/metallb.yaml
+cp srcs/wordpress/wpconfig.sql srcs/wordpress/wpconfig-target.sql
+sed -i '' "s/##MINIKUBE_IP##/$MINIKUBE_IP/g" srcs/wordpress/wpconfig-target.sql
+cp srcs/ftps/entrypoint srcs/ftps/entrypoint-target
+sed -i '' "s/##MINIKUBE_IP##/$MINIKUBE_IP/g" srcs/ftps/entrypoint-target
+cp srcs/metallb.yaml srcs/metallb-target.yaml
+sed -i '' "s/##MINIKUBE_IP##/$MINIKUBE_IP/g" srcs/metallb.yaml
 
 eval $(minikube docker-env)
 docker build -t nginx_alpine srcs/nginx
-#docker build -t mysql_alpine srcs/mysql
-#docker build -t wordpress_alpine srcs/wordpress
-#docker build -t ftps_alpine srcs/ftps
+docker build -t mysql_alpine srcs/mysql
+docker build -t wordpress_alpine srcs/wordpress
+docker build -t ftps_alpine srcs/ftps
+docker build -t ftps_alpine --build-arg IP=$ftps_ip srcs/ftps
 
 if [ "$1" = "delete" ]
 then
@@ -42,4 +50,4 @@ else
 	kubectl apply -k srcs
 fi
 
-#minikube dashboard
+minikube dashboard

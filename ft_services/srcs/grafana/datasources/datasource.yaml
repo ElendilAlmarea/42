@@ -1,0 +1,58 @@
+apiVersion: 1
+datasources:
+- name: nginx_ds
+  type: influxdb
+  access: proxy
+  database: nginx_db
+  user: telegraf
+  secureJsonData:
+    password: root
+  url: http://influxdb:8086
+- name: phpmyadmin_ds
+  type: influxdb
+  access: proxy
+  database: phpmyadmin_db
+  user: telegraf
+  secureJsonData:
+    password: root
+  url: http://influxdb:8086
+- name: wordpress_ds
+  type: influxdb
+  access: proxy
+  database: wordpress_db
+  user: telegraf
+  secureJsonData:
+    password: root
+  url: http://influxdb:8086
+- name: mysql_ds
+  type: influxdb
+  access: proxy
+  database: mysql_db
+  user: telegraf
+  secureJsonData:
+    password: root
+  url: http://influxdb:8086
+- name: ftps_ds
+  type: influxdb
+  access: proxy
+  database: ftps_db
+  user: telegraf
+  secureJsonData:
+    password: root
+  url: http://influxdb:8086
+- name: influxdb_ds
+  type: influxdb
+  access: proxy
+  database: influxdb_db
+  user: telegraf
+  secureJsonData:
+    password: root
+  url: http://influxdb:8086
+- name: grafana_ds
+  type: influxdb
+  access: proxy
+  database: grafana_db
+  user: telegraf
+  secureJsonData:
+    password: root
+  url: http://influxdb:8086

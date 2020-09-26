@@ -7,14 +7,20 @@ metadata:
 spec:
     ports:
         - port: 80
+          targetPort: 80
           name: http
+          protocol: TCP
         - port: 443
+          targetPort: 443
           name: https
-        #- port: 22
-          #name: ssh
+          protocol: TCP
+        - port: 22
+          targetPort: 22
+          name: ssh
     selector:
         app: ft_services
         tier: nginx
+    type: LoadBalancer
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -46,5 +52,5 @@ spec:
                 name: http
               - containerPort: 443
                 name: https
-              #- containerPort: 22
-                #name: ssh
+              - containerPort: 22
+                name: ssh
