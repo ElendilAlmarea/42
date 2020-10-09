@@ -1,0 +1,98 @@
+{
+	"header_protection":
+	{
+		"scope": "c, cpp",
+		"prefix": "#ifndef",
+		"body":
+		[
+			"#ifndef ${TM_FILENAME/([^\\.]*)(\\.)*/${1:/upcase}${2:+_}/g}",
+			"# define ${TM_FILENAME/([^\\.]*)(\\.)*/${1:/upcase}${2:+_}/g}",
+			"\n$0\n\n#endif"
+		],
+		"description": "header file template",
+	},
+
+	"class_definition":
+	{
+		"scope": "cpp",
+		"prefix": "class",
+		"body":
+		[
+			"class\t\t\t\t\t\t${TM_FILENAME/(.*)\\..+$/$1/}",
+			"{",
+			"\t$1",
+			"  public:",
+			"\t${TM_FILENAME/(.*)\\..+$/$1/}($2);",
+			"\t${TM_FILENAME/(.*)\\..+$/$1/}(cosnt ${TM_FILENAME/(.*)\\..+$/$1/}&);",
+			"\t~${TM_FILENAME/(.*)\\..+$/$1/}();",
+			"\t${TM_FILENAME/(.*)\\..+$/$1/}& operator=(const ${TM_FILENAME/(.*)\\..+$/$1/}&);",
+			"\t$3",
+			"};\n",
+		],
+		"description": "class definition template",
+	},
+
+	"class_functions_definition":
+	{
+		"scope": "cpp",
+		"prefix": "coplien",
+		"body":
+		[
+			"#include \"${TM_FILENAME/(.*)\\..+$/$1/}.hpp\"\n",
+			"${TM_FILENAME/(.*)\\..+$/$1/}::${TM_FILENAME/(.*)\\..+$/$1/}()",
+			"{\n\t\n}\n",
+			"${TM_FILENAME/(.*)\\..+$/$1/}::${TM_FILENAME/(.*)\\..+$/$1/}(const ${TM_FILENAME/(.*)\\..+$/$1/}& copy)",
+			"{\n\t*this = copy;\n}\n",
+			"${TM_FILENAME/(.*)\\..+$/$1/}::~${TM_FILENAME/(.*)\\..+$/$1/}()",
+			"{\n\t\n}\n",
+			"${TM_FILENAME/(.*)\\..+$/$1/}& ${TM_FILENAME/(.*)\\..+$/$1/}::operator=(const ${TM_FILENAME/(.*)\\..+$/$1/}& copy)",
+			"{\n\t\n\treturn (*this);\n}",
+		],
+		"description": "class.cpp template",
+	},
+
+	"struct_definition":
+	{
+		"scope": "c, cpp",
+		"prefix": "typedef struct",
+		"body":
+		[
+			"typedef struct\t\t\t\ts_$1",
+			"{",
+			"\t$0",
+			"}\t\t\t\t\t\t\tt_$1;\n",
+		],
+		"description": "structure definition template",
+	},
+
+	"main":
+	{
+		"scope": "c, cpp",
+		"prefix": "int main",
+		"body":
+		[
+			"int main(${1:int ac${2:, char **av${3:, char **env}}})",
+			"{",
+			"\t$0",
+			"\treturn (0);",
+			"}"
+		],
+		"description": "main definition template",
+	},
+
+	"return":
+	{
+		"scope": "c, cpp",
+		"prefix": "return",
+		"body": "return ($1);$0",
+		"description": "fast return",
+	},
+
+	"output":
+	{
+		"scope": "cpp",
+		"prefix": "<<",
+		"body": "<< $1 << std::endl;$0",
+		"description": "output with << template",
+	}
+}

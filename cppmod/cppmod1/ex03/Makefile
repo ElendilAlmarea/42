@@ -1,4 +1,4 @@
-NAME =		a.out
+NAME =		zombie
 CC =		clang++
 CFLAGS =	-Wall -Werror -Wextra
 

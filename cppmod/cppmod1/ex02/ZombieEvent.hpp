@@ -2,6 +2,7 @@
 # define ZOMBIEEVENT_HPP
 
 #include <iostream>
+#include "Zombie.hpp"
 
 class ZombieEvent
 {
