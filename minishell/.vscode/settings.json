@@ -1,0 +1,15 @@
+{
+"norminette.command": "norminette",
+"norminette.fileregex": "*.[ch]$",
+"editor.tabSize": 4,
+"editor.insertSpaces": false,
+"editor.renderWhitespace": "all",
+"files.trimTrailingWhitespace": true,
+"files.insertFinalNewline": true,
+"editor.detectIndentation": false,
+"files.associations": {
+	"minishell.h": "c",
+	"libft.h": "c",
+	"signal.h": "c"
+}
+}
