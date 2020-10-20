@@ -1,4 +1,4 @@
-NAME =		pony
+NAME =		replace
 CC =		clang++
 CFLAGS =	-Wall -Werror -Wextra
 

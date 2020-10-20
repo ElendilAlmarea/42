@@ -11,7 +11,7 @@ class ZombieEvent
 		Zombie *newZombie(std::string name);
 		Zombie *randomChump(void);
 	private:
-		std::string type;
+		std::string type = "atk";
 };
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: yvanat <yvanat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 19:28:41 by yvanat            #+#    #+#             */
-/*   Updated: 2020/10/09 20:13:04 by yvanat           ###   ########.fr       */
+/*   Updated: 2020/10/20 15:57:06 by yvanat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ class ZombieHorde
 	public:
 		ZombieHorde(int n);
 		~ZombieHorde(void);
+		Zombie	*newZombie(std::string name);
 		void	announce(void);
+		Zombie	*zombies;
 	private:
 		int		n;
 };
