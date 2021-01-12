@@ -1,53 +1,69 @@
 #!/bin/sh
 
+
+if $OSTYPE != "linux-gnu"*
+then
+	echo "unsupported OS, pls use linux"
+fi
+
 if ! which docker >/dev/null
 then
-	brew install docker
+	echo "install docker"
+	exit 1
 fi
 if ! which minikube >/dev/null
 then
-	brew install minikube
+	echo "install minikube"
+	exit 1
 fi
+
 if ! minikube status >/dev/null
 then
-	minikube start --vm-driver=virtualbox --cpus=2 --disk-size=40000mb \
-		--memory=3000mb --bootstrapper=kubeadm
+	if ! minikube start --vm-driver=docker --bootstrapper=kubeadm
+	then
+		echo "Couldn't start minikube"
+		exit 1
+	fi
 	minikube addons enable metrics-server
-	minikube addons enable dashboard
+	kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/namespace.yaml
+    kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/metallb.yaml
+    kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
+	kubectl delete deployments --all
+	kubectl delete svc --all
 fi
 
-kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/namespace.yaml
-kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/metallb.yaml
-kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
-kubectl delete deployments --all
-kubectl delete svc --all
-ftps_ip='192.168.99.110'
-grafana_ip='192.168.99.111'
-nginx_ip='192.168.99.112'
-phpmyadmin_ip='192.168.99.113'
-wordpress_ip='192.168.99.114'
+ftps_ip='172.17.0.12'
+grafana_ip='172.17.0.13'
+nginx_ip='172.17.0.14'
+phpmyadmin_ip='172.17.0.15'
+wordpress_ip='172.17.0.16'
 
-MINIKUBE_IP=$(minikube ip)
+eval $(minikube docker-env);
 
-cp srcs/wordpress/wpconfig.sql srcs/wordpress/wpconfig-target.sql
-sed -i '' "s/##MINIKUBE_IP##/$MINIKUBE_IP/g" srcs/wordpress/wpconfig-target.sql
-cp srcs/ftps/entrypoint srcs/ftps/entrypoint-target
-sed -i '' "s/##MINIKUBE_IP##/$MINIKUBE_IP/g" srcs/ftps/entrypoint-target
-cp srcs/metallb.yaml srcs/metallb-target.yaml
-sed -i '' "s/##MINIKUBE_IP##/$MINIKUBE_IP/g" srcs/metallb.yaml
+sed -i.backup "s/metallb_ips/$ftps_ip-$wordpress_ip/g" srcs/metallb.yaml
+sed -i.backup "s/grafana_ip/$grafana_ip/g" srcs/nginx/nginx.conf
+sed -i.trash "s/nginx_ip/$nginx_ip/g" srcs/nginx/nginx.conf
+sed -i.trash "s/phpmyadmin_ip/$phpmyadmin_ip/g" srcs/nginx/nginx.conf
+sed -i.trash "s/wordpress_ip/$wordpress_ip/g" srcs/nginx/nginx.conf
+sed -i.backup "s/wordpress_ip/$wordpress_ip/g" srcs/wordpress/wordpressconf.sql
 
-eval $(minikube docker-env)
-docker build -t nginx_alpine srcs/nginx
-docker build -t mysql_alpine srcs/mysql
-docker build -t wordpress_alpine srcs/wordpress
-docker build -t ftps_alpine srcs/ftps
-docker build -t ftps_alpine --build-arg IP=$ftps_ip srcs/ftps
+docker build -t mysql-image srcs/mysql
+docker build -t cleaner-image srcs/cleaner
+docker build -t nginx-image srcs/nginx
+docker build -t phpmyadmin-image srcs/phpmyadmin
+docker build -t wordpress-image srcs/wordpress
+docker build -t grafana-image srcs/grafana
+docker build -t influxdb-image srcs/influxdb
+docker build -t ftps-image --build-arg IP=$ftps_ip srcs/ftps
+kubectl apply -k srcs
 
-if [ "$1" = "delete" ]
-then
-	kubectl delete -k srcs
-else
-	kubectl apply -k srcs
-fi
+mv srcs/metallb.yaml.backup srcs/metallb.yaml
+mv srcs/nginx/nginx.conf.backup srcs/nginx/nginx.conf
+mv srcs/wordpress/wordpressconf.sql.backup srcs/wordpress/wordpressconf.sql
+rm -rf srcs/nginx/*.trash*
+
+echo "index : http://$nginx_ip"
+echo "ssh connection : ssh www@$nginx_ip password: www"
+echo "ftp connection : ftpes://$ftps_ip username: www password: www"
 
 minikube dashboard

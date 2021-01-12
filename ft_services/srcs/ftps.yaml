@@ -1,80 +1,79 @@
 apiVersion: v1
 kind: Service
 metadata:
-    name: ftps
-    labels:
-        app: ft_services
+  name: ftps
 spec:
-    ports:
-    - port: 21
-      targetPort: 21
-      name: ftps
-    - port: 15477
-      name: ftps-data
-    - port: 21000
-      targetPort: 21000
-      name: kube-ftps
-    selector:
-        app: ft_services
-        tier: ftps
-    type: LoadBalancer
+  selector:
+    app: ftps
+  ports:
+  - name: ftps
+    port: 21
+    targetPort: 21
+  - name: kube-ftps
+    port: 21000
+    targetPort: 21000
+  type: LoadBalancer
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ftps-pv
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 1Gi
+  accessModes:
+  - ReadWriteOnce
+  hostPath:
+    path: "/var/lib/ftps"
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-    name: ftps-pv-claim
-    labels:
-        app: ft_services
+  name: ftps-pv-claim
+  labels:
+    app: ftps
 spec:
-    accessModes:
-    - ReadWriteOnce
-    resources:
-        requests:
-            storage: 2Gi
+  storageClassName: manual
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: ftps
-    labels:
-        app: ft_services
+  name: ftps-deployment
 spec:
-    strategy:
-        type: Recreate
-    selector:
-        matchLabels:
-            app: ft_services
-            tier: ftps
-        replicas: 1
-        template:
-            metadata:
-                labels:
-                    app: ft_services
-                    tier: ftps
-            spec:
-                restartPolicy: Always
-                containers:
-                - name: ftps
-                  image: ftps_alpine
-                  imagePullPolicy: Never
-                  ports:
-                  - containerPort: 21
-                    hostPort: 21
-                  - containerPort: 15477
-                    hostPort: 15477
-                  - containerPort: 21000
-                    hostPort: 21000
-                  volumeMounts:
-                  - mountPath: /home/ftpusers
-                    name: ftps-persistant-storage
-                  - mountPath: /etc/ssl/private
-                    name: ftps-keys
-                  env:
-                  - name: FTP_USER
-                    value: admin
-                  - name: FTP_PASSWORD
-                    value: admin
-                volumes:
-                - name: ftps-persistant-storage
-                  persistentVolumeClaim:
-                      claimName: ftps-pv-claim
+  selector:
+    matchLabels:
+      app: ftps
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: ftps
+    spec:
+      volumes:
+      - name: ftps-pv
+        persistentVolumeClaim:
+          claimName: ftps-pv-claim
+      containers:
+      - name: ftps
+        image: ftps-image
+        volumeMounts:
+        - name: ftps-pv
+          mountPath: /home
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 21
+        - containerPort: 21000
+        livenessProbe:
+          exec:
+            command:
+            - /bin/bash
+            - -c
+            - pidof telegraf
+          initialDelaySeconds: 30
+          periodSeconds: 2
