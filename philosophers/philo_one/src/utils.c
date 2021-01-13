@@ -6,7 +6,7 @@
 /*   By: yvanat <yvanat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 18:24:24 by yvanat            #+#    #+#             */
-/*   Updated: 2021/01/12 19:04:19 by yvanat           ###   ########.fr       */
+/*   Updated: 2021/01/13 18:29:02 by yvanat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,15 @@ int     ft_strlen(const char *s)
 	return (i);
 }
 
-void    write_status(int timestamp, int philo, char *action)
+void    write_status(int timestamp, int philo, char *action, int alive)
 {
-    ft_putnbr_fd(timestamp, 1);
-    write(1, " ", 1);
-    ft_putnbr_fd(philo, 1);
-    write(1, action, ft_strlen(action));
+	if (alive)
+	{
+		ft_putnbr_fd(timestamp, 1);
+		write(1, " ", 1);
+		ft_putnbr_fd(philo + 1, 1);
+		write(1, action, ft_strlen(action));
+	}
 }
 
 int	ft_atoi(const char *nptr)
