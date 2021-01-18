@@ -6,7 +6,7 @@
 #    By: yvanat <yvanat@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/27 06:20:58 by mbrunel           #+#    #+#              #
-#    Updated: 2021/01/17 15:52:32 by yvanat           ###   ########.fr        #
+#    Updated: 2021/01/18 17:02:25 by yvanat           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ DIRS:=$(BUILD) $(D_DEP)  $(addprefix $(D_DEP)/, $(D_SUB))\
 SRC=main.c\
 	utils.c\
 	utils2.c\
+	philosophers.c\
 
 OBJ:=$(patsubst %.c, $(D_OBJ)/%.o, $(SRC))
 DEP:=$(patsubst %.c, $(D_DEP)/%.d, $(SRC))

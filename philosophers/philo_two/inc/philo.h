@@ -6,7 +6,7 @@
 /*   By: yvanat <yvanat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 16:46:17 by yvanat            #+#    #+#             */
-/*   Updated: 2021/01/17 16:35:01 by yvanat           ###   ########.fr       */
+/*   Updated: 2021/01/18 17:03:27 by yvanat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@
 # define NEED_EAT 0
 # define NEED_SLEEP 1
 # define NEED_THINK 2
+# define DEAD 3
 
-typedef struct		s_thread
+typedef struct		s_tvar
 {
 	int				alive;
-	int				num_philo;
 	int				nb_philo;
 	int				t_die;
 	int				t_eat;
@@ -42,23 +42,30 @@ typedef struct		s_thread
 	int				*forks;
 	pthread_mutex_t	mutex_forks;
 	struct timeval	initial_time;
-}					t_thread;
-
-typedef struct		s_tvar
-{
-	int				num_philo;
-	int				state;
-	struct timeval	now;
-	struct timeval	last_eat;
 }					t_tvar;
 
-void				init_struct(t_thread *thread, int argc, char **argv);
+typedef struct		s_thread
+{
+	struct timeval	now;
+	struct timeval	last_eat;
+	int				num_philo;
+	int				state;
+	t_tvar			*var;
+}					t_thread;
+
+void				*philosophers(void *data);
+int					init_struct(t_thread **thread, t_tvar **var, int argc,
+	char **argv);
 int					diff_time_ms(struct timeval first, struct timeval second);
 void				ft_putnbr_fd(int n, int fd);
 int					ft_strlen(const char *s);
-void				write_status(int timestamp, int philo, char *action,
-	int alive);
+void				write_status(t_thread *thread, char *action);
 int					ft_atoi(const char *nptr);
 int					nb_eat(int *tab_eat, int nb_eat, int nb_philo);
+int					free_ret(void *one, void *two, void *three, void *four);
+void				sleep_think(t_thread *thread);
+int					check_philo(t_thread *thread);
+void				eat(t_thread *thread);
+int					eating(t_thread *thread);
 
 #endif
