@@ -6,7 +6,7 @@
 /*   By: yvanat <yvanat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 18:24:24 by yvanat            #+#    #+#             */
-/*   Updated: 2021/01/18 15:42:36 by yvanat           ###   ########.fr       */
+/*   Updated: 2021/01/18 18:25:22 by yvanat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,15 +59,18 @@ int		ft_strlen(const char *s)
 
 void	write_status(t_thread *thread, char *action)
 {
-	pthread_mutex_lock(&(thread->var->mutex_forks));
+	struct timeval	now;
+
+	sem_wait(thread->var->status);
 	if (thread->state == DEAD || thread->var->alive)
 	{
-		ft_putnbr_fd(diff_time_ms(thread->now, thread->var->initial_time), 1);
+		gettimeofday(&now, NULL);
+		ft_putnbr_fd(diff_time_ms(now, thread->var->initial_time), 1);
 		write(1, " ", 1);
 		ft_putnbr_fd(thread->num_philo + 1, 1);
 		write(1, action, ft_strlen(action));
 	}
-	pthread_mutex_unlock(&(thread->var->mutex_forks));
+	sem_post(thread->var->status);
 }
 
 int		ft_atoi(const char *nptr)

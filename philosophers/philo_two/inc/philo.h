@@ -6,7 +6,7 @@
 /*   By: yvanat <yvanat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 16:46:17 by yvanat            #+#    #+#             */
-/*   Updated: 2021/01/18 17:03:27 by yvanat           ###   ########.fr       */
+/*   Updated: 2021/01/18 18:36:15 by yvanat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include <unistd.h>
 # include <sys/time.h>
 # include <string.h>
+# include <semaphore.h>
+# include <fcntl.h>
 
 # define FORK " has taken a fork\n"
 # define EAT " is eating\n"
@@ -39,8 +41,8 @@ typedef struct		s_tvar
 	int				t_sleep;
 	int				nb_eat;
 	int				*tab_eat;
-	int				*forks;
-	pthread_mutex_t	mutex_forks;
+	sem_t			*forks;
+	sem_t			*status;
 	struct timeval	initial_time;
 }					t_tvar;
 
@@ -56,6 +58,7 @@ typedef struct		s_thread
 void				*philosophers(void *data);
 int					init_struct(t_thread **thread, t_tvar **var, int argc,
 	char **argv);
+void				init_struct_var(int argc, char **argv, t_tvar **var);
 int					diff_time_ms(struct timeval first, struct timeval second);
 void				ft_putnbr_fd(int n, int fd);
 int					ft_strlen(const char *s);

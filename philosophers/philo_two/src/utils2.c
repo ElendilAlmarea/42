@@ -6,7 +6,7 @@
 /*   By: yvanat <yvanat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 15:32:54 by yvanat            #+#    #+#             */
-/*   Updated: 2021/01/18 16:43:54 by yvanat           ###   ########.fr       */
+/*   Updated: 2021/01/18 18:35:44 by yvanat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,29 @@ int		init_struct(t_thread **thread, t_tvar **var,
 	if (!(*thread = malloc(sizeof(t_thread) * ft_atoi(argv[1]))))
 		return (-1);
 	if (!(*var = malloc(sizeof(t_tvar))))
-		return (free_ret(thread, NULL, NULL, NULL));
-	pthread_mutex_init(&((*var)->mutex_forks), NULL);
+		return (free_ret(*thread, NULL, NULL, NULL));
+	init_struct_var(argc, argv, var);
+	if (!((*var)->tab_eat = malloc(sizeof(int) * ft_atoi(argv[1]))))
+		return (free_ret(*thread, *var, NULL, NULL));
+	(*var)->alive = -1;
+	while (++((*var)->alive) < (*var)->nb_philo)
+		(*var)->tab_eat[(*var)->alive] = 0;
+	(*var)->alive = 1;
+	sem_unlink("forks");
+	if (!((*var)->forks = sem_open("forks", O_CREAT, 0, (*var)->nb_philo)))
+		return (free_ret(*thread, (*var)->tab_eat, *var, NULL));
+	sem_unlink("status");
+	if (!((*var)->status = sem_open("status", O_CREAT, 0, 1)))
+	{
+		sem_close((*var)->forks);
+		sem_unlink("forks");
+		return (free_ret(*thread, (*var)->tab_eat, *var, NULL));
+	}
+	return (0);
+}
+
+void	init_struct_var(int argc, char **argv, t_tvar **var)
+{
 	(*var)->nb_philo = ft_atoi(argv[1]);
 	(*var)->t_die = ft_atoi(argv[2]);
 	(*var)->t_eat = ft_atoi(argv[3]);
@@ -51,16 +72,4 @@ int		init_struct(t_thread **thread, t_tvar **var,
 		(*var)->nb_eat = ft_atoi(argv[5]);
 	else
 		(*var)->nb_eat = -1;
-	if (!((*var)->tab_eat = malloc(sizeof(int) * ft_atoi(argv[1]))))
-		return (free_ret(thread, var, NULL, NULL));
-	if (!((*var)->forks = malloc(sizeof(int) * ft_atoi(argv[1]))))
-		return (free_ret(thread, (*var)->tab_eat, *var, NULL));
-	(*var)->alive = -1;
-	while (++((*var)->alive) < (*var)->nb_philo)
-	{
-		(*var)->tab_eat[(*var)->alive] = 0;
-		(*var)->forks[(*var)->alive] = 1;
-	}
-	(*var)->alive = 1;
-	return (0);
 }

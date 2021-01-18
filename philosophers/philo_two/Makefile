@@ -6,11 +6,11 @@
 #    By: yvanat <yvanat@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/27 06:20:58 by mbrunel           #+#    #+#              #
-#    Updated: 2021/01/18 17:02:25 by yvanat           ###   ########.fr        #
+#    Updated: 2021/01/18 17:12:55 by yvanat           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME=philo_one
+NAME=philo_two
 
 CC=clang
 CFLAGS=-Wall -Wextra -Werror -g3

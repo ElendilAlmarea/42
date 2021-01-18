@@ -6,11 +6,31 @@
 /*   By: yvanat <yvanat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 17:02:40 by yvanat            #+#    #+#             */
-/*   Updated: 2021/01/18 17:03:00 by yvanat           ###   ########.fr       */
+/*   Updated: 2021/01/18 17:59:45 by yvanat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void	*philosophers(void *data)
+{
+	t_thread		*thread;
+
+	thread = (t_thread*)data;
+	while (thread->var->alive)
+	{
+		if (check_philo(thread))
+			continue ;
+		if (thread->state == NEED_EAT)
+		{
+			eat(thread);
+			if (eating(thread))
+				continue ;
+		}
+		sleep_think(thread);
+	}
+	return (NULL);
+}
 
 int		check_philo(t_thread *thread)
 {
@@ -34,28 +54,12 @@ int		check_philo(t_thread *thread)
 
 void	eat(t_thread *thread)
 {
-	pthread_mutex_lock(&(thread->var->mutex_forks));
-	if (thread->var->forks[thread->num_philo] && ((thread->num_philo ==
-		thread->var->nb_philo - 1 && thread->var->forks[0]) ||
-		(thread->num_philo != thread->var->nb_philo - 1 &&
-		thread->var->forks[thread->num_philo + 1])))
-	{
-		(thread->var->forks[thread->num_philo])--;
-		if (thread->num_philo == thread->var->nb_philo - 1)
-			(thread->var->forks[0])--;
-		else
-			(thread->var->forks[thread->num_philo + 1])--;
-		pthread_mutex_unlock(&(thread->var->mutex_forks));
-		write_status(thread, FORK);
-		write_status(thread, FORK);
-		write_status(thread, EAT);
-		thread->state = NEED_SLEEP;
-	}
-	else
-	{
-		pthread_mutex_unlock(&(thread->var->mutex_forks));
-		usleep(100);
-	}
+	sem_wait(thread->var->forks);
+	sem_wait(thread->var->forks);
+	write_status(thread, FORK);
+	write_status(thread, FORK);
+	write_status(thread, EAT);
+	thread->state = NEED_SLEEP;
 }
 
 int		eating(t_thread *thread)
@@ -65,36 +69,11 @@ int		eating(t_thread *thread)
 		gettimeofday(&(thread->last_eat), NULL);
 		usleep(thread->var->t_eat * 1000);
 		(thread->var->tab_eat[thread->num_philo])++;
-		pthread_mutex_lock(&(thread->var->mutex_forks));
-		(thread->var->forks[thread->num_philo])++;
-		if (thread->num_philo == thread->var->nb_philo - 1)
-			(thread->var->forks[0])++;
-		else
-			(thread->var->forks[thread->num_philo + 1])++;
-		pthread_mutex_unlock(&(thread->var->mutex_forks));
+		sem_post(thread->var->forks);
+		sem_post(thread->var->forks);
 		return (1);
 	}
 	return (0);
-}
-
-void	*philosophers(void *data)
-{
-	t_thread		*thread;
-
-	thread = (t_thread*)data;
-	while (thread->var->alive)
-	{
-		if (check_philo(thread))
-			continue ;
-		if (thread->state == NEED_EAT)
-		{
-			eat(thread);
-			if (eating(thread))
-				continue ;
-		}
-		sleep_think(thread);
-	}
-	return (NULL);
 }
 
 void	sleep_think(t_thread *thread)

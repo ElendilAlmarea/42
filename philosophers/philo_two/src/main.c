@@ -6,7 +6,7 @@
 /*   By: yvanat <yvanat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 16:45:56 by yvanat            #+#    #+#             */
-/*   Updated: 2021/01/18 17:02:56 by yvanat           ###   ########.fr       */
+/*   Updated: 2021/01/18 18:18:13 by yvanat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ int		main(int argc, char **argv)
 	i = -1;
 	while (++i < var->nb_philo)
 		pthread_join(philo[i], NULL);
-	pthread_mutex_destroy(&(var->mutex_forks));
-	free_ret(var->tab_eat, var->forks, var, thread);
+	sem_close(var->forks);
+	sem_unlink("forks");
+	free_ret(var->tab_eat, var, thread, NULL);
 	return (0);
 }
