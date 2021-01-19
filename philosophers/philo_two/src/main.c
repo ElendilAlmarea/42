@@ -6,7 +6,7 @@
 /*   By: yvanat <yvanat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 16:45:56 by yvanat            #+#    #+#             */
-/*   Updated: 2021/01/18 18:18:13 by yvanat           ###   ########.fr       */
+/*   Updated: 2021/01/19 17:28:33 by yvanat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ int		main(int argc, char **argv)
 		thread[i].state = NEED_EAT;
 		thread[i].var = var;
 		thread[i].last_eat = var->initial_time;
-		if (pthread_create(&philo[i], NULL, philosophers, thread + i))
-			return (-1);
+		pthread_create(&philo[i], NULL, philosophers, thread + i);
 	}
 	i = -1;
 	while (++i < var->nb_philo)
 		pthread_join(philo[i], NULL);
 	sem_close(var->forks);
 	sem_unlink("forks");
-	free_ret(var->tab_eat, var, thread, NULL);
-	return (0);
+	sem_close(var->status);
+	sem_unlink("status");
+	return (free_ret(var->tab_eat, var, thread, NULL) + 1);
 }
