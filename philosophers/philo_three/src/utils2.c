@@ -6,7 +6,7 @@
 /*   By: yvanat <yvanat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 15:32:54 by yvanat            #+#    #+#             */
-/*   Updated: 2021/01/19 17:18:25 by yvanat           ###   ########.fr       */
+/*   Updated: 2021/01/19 20:00:55 by yvanat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,6 @@ int		init_struct(t_thread **thread, t_tvar **var,
 	if (!(*var = malloc(sizeof(t_tvar))))
 		return (free_ret(*thread, NULL, NULL, NULL));
 	init_struct_var(argc, argv, var);
-	if (!((*var)->tab_eat = malloc(sizeof(int) * ft_atoi(argv[1]))))
-		return (free_ret(*thread, *var, NULL, NULL));
 	sem_unlink("forks");
 	if (!((*var)->forks = sem_open("forks", O_CREAT, 0, (*var)->nb_philo)))
 		return (free_ret(*thread, (*var)->tab_eat, *var, NULL));
