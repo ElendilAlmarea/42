@@ -1,6 +1,6 @@
 #!/bin/sh
 
-telegraf &
+#telegraf &
 
 # parameters
 MYSQL_ROOT_PWD=${MYSQL_ROOT_PWD:-""}

@@ -19,6 +19,6 @@ RUN mkdir /etc/telegraf \
 && rm -rf /var/cache/apk/*
 COPY telegraf.conf /etc/telegraf/telegraf.conf
 
-VOLUME ["/var/lib/mysql"]
+#VOLUME ["/var/lib/mysql"]
 
 ENTRYPOINT ["/scripts/start.sh"]

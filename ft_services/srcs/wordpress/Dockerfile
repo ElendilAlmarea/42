@@ -17,7 +17,7 @@ RUN wget https://wordpress.org/latest.tar.gz -P /tmp \
 COPY wp-config.php /wordpress
 COPY setup.sh /
 RUN chmod -R 775 /wordpress && chmod 775 setup.sh
-COPY wordpressconf.sql /
+COPY wpconfig.sql /
 
 
 #telegraf setup
