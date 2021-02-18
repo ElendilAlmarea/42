@@ -8,10 +8,10 @@ spec:
   ports:
   - port: 3306
     targetPort: 3306
-    name: mysql_port
+    name: mysql-port
   selector:
     app: mysql
-  type: clusterIP
+  type: ClusterIP
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -65,14 +65,14 @@ spec:
         volumeMounts:
         - name: mysql-pv
           mountPath: /var/lib/mysql/
-        livenessProbe:
-          exec:
-            command:
-            - /bin/bash
-            - -c
-            - pidof telegraf
-          initialDelaySeconds: 30
-          periodSeconds: 2
+        # livenessProbe:
+        #   exec:
+        #     command:
+        #     - /bin/bash
+        #     - -c
+        #     - pidof telegraf
+        #   initialDelaySeconds: 30
+        #   periodSeconds: 2
       volumes:
         - name: mysql-pv
           persistentVolumeClaim:
